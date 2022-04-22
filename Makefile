@@ -699,11 +699,14 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning, address-of-packed-member)
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
+KBUILD_AFLAGS	+= -Os
 else
 ifdef CONFIG_PROFILE_ALL_BRANCHES
 KBUILD_CFLAGS	+= -O2 $(call cc-disable-warning,maybe-uninitialized,)
+KBUILD_AFLAGS	+= -O2
 else
 KBUILD_CFLAGS   += -O2
+KBUILD_AFLAGS   += -O2
 endif
 endif
 
@@ -712,6 +715,7 @@ KBUILD_CFLAGS += $(call cc-ifversion, -lt, 0409, \
 
 ifeq ($(CONFIG_ARCH_KONA),y)
 KBUILD_CFLAGS   += -mcpu=cortex-a77
+KBUILD_AFLAGS   += -mcpu=cortex-a77
 endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
